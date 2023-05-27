@@ -1,24 +1,63 @@
-# README
+# FurimaのER図
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column             | Type     | Option                    |
+| ------------------ | -------- | ------------------------- |
+| nickname           | string   | null: false               |
+| password           | string   | null: false               |
+| encrypted_password | string   | null: false               |
+| email              | string   | null: false, unique: true |
+| first_name         | string   | null: false               |
+| last_name          | string   | null: false               |
+| birthday           | datetime | null: false               |
 
-* Ruby version
+- has_many :items
+- has_many :orders
 
-* System dependencies
+## itemsテーブル
 
-* Configuration
+| Column            | Type       | Option                         |
+| ----------------- | ---------- | ------------------------------ |
+| item_name         | string     | null: false                    | 
+| explain           | text       | null: false                    |
+| category          | string     | null: false                    |
+| item_state        | string     | null: false                    |
+| charge            | integer    | null: false                    |
+| area              | string     | null: false                    |
+| deliver_day       | integer    | null: false                    |
+| price             | integer    | null: false                    |
+| user              | references | null: false, foreign_key: true |
 
-* Database creation
+- belongs_to :users
+- belongs_to :orders
 
-* Database initialization
+## ordersテーブル
 
-* How to run the test suite
+| Column       | Type       | Option                         |
+| ------------ | ---------- | ------------------------------ |
+| zip_code     | string     | null: false                    |
+| prefecture   | string     | null: false                    |
+| city         | string     | null: false                    |
+| build_name   | string     | null: false                    |
+| address      | string     | null: false                    |
+| phone_number | string     | null: false                    |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :users
+- belongs_to :items
+- has_one :delivers
 
-* Deployment instructions
+## deliversテーブル
 
-* ...
+| Column       | Type       | Option                         |
+| ------------ | ---------- | ------------------------------ |
+| zip_code     | string     | null: false                    |
+| prefecture   | string     | null: false                    |
+| city         | string     | null: false                    |
+| build_name   | string     | null: false                    |
+| address      | string     | null: false                    |
+| phone_number | string     | null: false                    |
+
+- belongs_to :orders
