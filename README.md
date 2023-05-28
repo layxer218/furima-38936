@@ -42,17 +42,18 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :delivers
+- has_one :deliver
 
 ## deliversテーブル
 
 | Column       | Type       | Option                         |
 | ------------ | ---------- | ------------------------------ |
-| zip_code_id  | integer    | null: false                    |
+| zip_code     | string     | null: false                    |
 | area_id      | integer    | null: false                    |
 | city         | string     | null: false                    |
 | build_name   | string     |                                |
 | address      | string     | null: false                    |
 | phone_number | string     | null: false                    |
+| order        | references | null: false, foreign_key: true |
 
 - belongs_to :order
