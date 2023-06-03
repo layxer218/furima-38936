@@ -61,10 +61,8 @@ group :production do
  gem 'pg'
 end
 
-
 gem 'devise'
 
 gem 'pry-rails'
 
 gem 'active_hash'
-

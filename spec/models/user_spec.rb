@@ -28,7 +28,6 @@ RSpec.describe User, type: :model do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        #binding.pry
         expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
       it "emialは@を含まないと登録できない" do
@@ -39,12 +38,12 @@ RSpec.describe User, type: :model do
       it "英字のみのパスワードでは登録できない" do
         @user.password = 'usertest'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "数字のみのパスワードでは登録できない" do
-        @user.password = "123456"
+        @user.password = '123456'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "passwordが空だと登録できない" do 
         @user.password = ''
