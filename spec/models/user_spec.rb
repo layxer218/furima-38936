@@ -36,12 +36,17 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it "英字のみのパスワードでは登録できない" do
-        @user.password = 'usertest'
+        @user.password = 'testmail'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "数字のみのパスワードでは登録できない" do
         @user.password = '123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it "passwordに全角文字を含むと登録できない" do
+        @user.password = 'ヤマダリクタロウ'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
@@ -64,7 +69,7 @@ RSpec.describe User, type: :model do
       it "姓（全角）が空だと登録できない" do
         @user.last_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name is invalid")
+        expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
       it "姓（全角）に半角文字が含まれていると登録できない" do
         @user.last_name = 'yamada'
@@ -74,7 +79,7 @@ RSpec.describe User, type: :model do
       it "名（全角）が空だと登録できない" do
         @user.first_name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid")
+        expect(@user.errors.full_messages).to include("First name can't be blank")
       end
       it "名（全角）に半角文字が含まれていると登録できない" do
         @user.first_name = 'rikutaro'
@@ -84,7 +89,7 @@ RSpec.describe User, type: :model do
       it "姓（カタカナ）が空だと登録できない" do
         @user.last_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana is invalid")
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
       end
       it "姓（カタカナ）にカタカナ以外（平仮名・漢字・英数字・記号）が含まれていると登録できない" do
         @user.last_name_kana = '山田'
@@ -94,7 +99,7 @@ RSpec.describe User, type: :model do
       it "名（カタカナ）が空だと登録できない" do
         @user.first_name_kana = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana is invalid")
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
       it "名（カタカナ）にカタカナ以外（平仮名・漢字・英数字・記号）が含まれていると登録できない" do
         @user.first_name_kana = '陸太郎'
