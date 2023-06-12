@@ -20,6 +20,6 @@ class Item < ApplicationRecord
   validates :charge_id,       numericality: { other_than: 1, message: "can't be blank"}
   validates :area_id,         numericality: { other_than: 1, message: "can't be blank"}
   validates :deliver_day_id,  numericality: { other_than: 1, message: "can't be blank"}
-  validates :price,           presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  validates :price,           presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
 end
