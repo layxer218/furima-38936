@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
+    @items = Item.all
   end
 
   def new
@@ -17,10 +18,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  #def destroy
+    #@item = Item.find(params[:id])
+    #@item.destroy
+    #redirect_to root_path
+  #end
+  
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :explane, :category_id, :item_state_id, :charge_id, :area_id, :deliver_day_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:image, :item_name, :explane, :category_id, :item_state_id, :charge_id, :area_id, :deliver_day_id, :price).merge(user_id: current_user.id)
   end
 
 end
