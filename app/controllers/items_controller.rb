@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
-  before_action :find_params, only: [:create, :show, :edit, :update]
+  before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all
@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.create(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -34,12 +35,12 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
 
-  #def destroy
-    #@item = Item.find(params[:id])
-    #@item.destroy
-    #redirect_to root_path
-  #end
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
   
   private
 
