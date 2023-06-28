@@ -128,17 +128,17 @@
     </div>
     <ul class='item-lists'>
 
-      <% @items.reverse_each do |item| %>
+      <% @item.reverse_each do |item| %>
         <li class='list'>
           <%= link_to item_path(item.id) do %>
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" if item.image.attached?%>
 
-            <%# 商品が売れていればsold outを表示しましょう %>
+            <% if item.order != nil %>
             <div class='sold-out'>
               <span>Sold Out!!</span>
             </div>
-            <%# //商品が売れていればsold outを表示しましょう %>
+            <% end %>
 
           </div>
           
@@ -158,7 +158,7 @@
         </li>
       <% end %>
 
-      <% if @items.blank? then%>
+      <% if @item.blank? then%>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>

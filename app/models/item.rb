@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :area
 
   belongs_to :user
-  #belongs_to :order
+  has_one :order
 
   has_one_attached :image
 
