@@ -4,10 +4,13 @@ RSpec.describe OrderForm, type: :model do
   before do
     @order_form = FactoryBot.build(:order_form)
   end
-
   describe "商品購入" do
     context "商品購入ができるとき" do
-      it "zip_code,area_id,city,address,phone_numberが存在するとき登録できる" do
+      it "正しく入力できた場合は購入できる" do
+        expect(@order_form).to be_valid
+      end
+      it "建物名が空でも購入できる" do
+        @order_form.build_name = ''
         expect(@order_form).to be_valid
       end
     end
@@ -43,7 +46,7 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("City can't be blank")
       end
-      it "addressだと登録できない" do
+      it "addressが空だと登録できない" do
         @order_form.address = ''
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Address can't be blank")
@@ -75,5 +78,4 @@ RSpec.describe OrderForm, type: :model do
       end
     end
   end
-
 end
