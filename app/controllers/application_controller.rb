@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
       username == 'layxer218' && password == '38936'
     end
   end
-  
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :first_name, :first_name_kana, :last_name, :last_name_kana, :birthday])
-  end
 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up,
+                                      keys: [:nickname, :first_name, :first_name_kana, :last_name, :last_name_kana, :birthday])
+  end
 end
