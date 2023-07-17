@@ -31,47 +31,47 @@ RSpec.describe OrderForm, type: :model do
       it 'zip_codeが空だと登録できない' do
         @order_form.zip_code = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Zip codeを入力してください")
+        expect(@order_form.errors.full_messages).to include("郵便番号を入力してください")
       end
       it '郵便番号にハイフンがないと登録できない' do
         @order_form.zip_code = '1234567'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Zip codeにハイフンを入れてください')
+        expect(@order_form.errors.full_messages).to include('郵便番号にハイフンを入れてください')
       end
       it 'areaが「---」だと登録できない' do
         @order_form.area_id = 1
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Areaを入力してください")
+        expect(@order_form.errors.full_messages).to include("都道府県を入力してください")
       end
       it 'cityが空だと登録できない' do
         @order_form.city = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Cityを入力してください")
+        expect(@order_form.errors.full_messages).to include("市町村を入力してください")
       end
       it 'addressが空だと登録できない' do
         @order_form.address = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Addressを入力してください")
+        expect(@order_form.errors.full_messages).to include("番地を入力してください")
       end
       it 'phone_numberが空だと登録できない' do
         @order_form.phone_number = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Phone numberを入力してください")
+        expect(@order_form.errors.full_messages).to include("電話番号を入力してください")
       end
       it '電話番号が9桁以下では登録できない' do
         @order_form.phone_number = '123456789'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone numberは不正な値です')
+        expect(@order_form.errors.full_messages).to include('電話番号は不正な値です')
       end
       it '電話番号が12桁以上では登録できない' do
         @order_form.phone_number = '1234567890123'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone numberは不正な値です')
+        expect(@order_form.errors.full_messages).to include('電話番号は不正な値です')
       end
       it '電話番号は半角数値でないと登録できない' do
         @order_form.phone_number = '123456789０'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone numberは不正な値です')
+        expect(@order_form.errors.full_messages).to include('電話番号は不正な値です')
       end
       it 'tokenが空だと登録できない' do
         @order_form.token = ''
